@@ -1,3 +1,5 @@
+# Next step: game's next methods
+
 #= Mastermind
 
 require "colorize"
@@ -11,15 +13,20 @@ class Game
 
 	def run_game
 	end
+
+	def get_player_name
+		print "Please enter your name:"
+		@player_name = gets.chomp
+	end
+
+	def create_code
+	end
 end
 
 class Board
 	def initialize
 		@guesses = {}
 		@feedbacks = {}
-		# DELETE
-		puts "Created a new board!"
-		puts display_board
 	end
 
 	def display_board
@@ -43,10 +50,13 @@ class Board
 	end
 end
 
-class Player
-end
-
 class Peg
+	@@guess_pegs = %w(R, G, B, M, C, Y) # Red Green Blue Magenta Cyan Yellow
+
+	def initialize(color)
+		@color = color
+	end
+
 end
 
 game = Game.new
