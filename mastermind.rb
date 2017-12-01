@@ -26,9 +26,11 @@ class Board
 		puts "+====+".colorize(:yellow)
 		12.times do |num|
 			if @guesses.key?(num)
+				print "+".colorize(:yellow)
 				@guesses[num].each do |peg|
-					print "+#{peg}+".colorize(:yellow)
+					print peg.colorize(:yellow)
 				end
+				print "+".colorize(:yellow)
 			else
 				print "+----+".colorize(:yellow)
 			end

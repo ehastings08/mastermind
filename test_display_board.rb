@@ -1,18 +1,22 @@
+require 'colorize'
+
 guesses = ['R','Y','G','B']
 
 def display_board(guesses)
-	print "+====+"
-	for 12.times do |num|
-		puts num
+		puts "+====+".colorize(:yellow)
+		12.times do |num|
+			if true
+				print "+"
+				guesses.each do |peg|
+					print peg.colorize(:yellow)
+				end
+				print "+"
+			else
+				print "+----+".colorize(:yellow)
+			end
+			print "\n"
+		end
+		puts "+====+".colorize(:yellow)
 	end
-end
 
-puts display_board(guesses)
-
-# if guesses.keys?(num)
-# 			guesses[num].each do |peg|
-# 				print peg
-# 			end
-# 		else
-# 			print "-"
-# 		end
+display_board(guesses)
