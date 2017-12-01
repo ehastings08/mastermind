@@ -25,9 +25,9 @@ class Board
 	def display_board
 		puts "+====+".colorize(:yellow)
 		12.times do |num|
-			if @guesses.key?(num)
+			if @guesses.key?(num+1)
 				print "+".colorize(:yellow)
-				@guesses[num].each do |peg|
+				@guesses[num+1].each do |peg|
 					print peg.colorize(:yellow)
 				end
 				print "+".colorize(:yellow)
