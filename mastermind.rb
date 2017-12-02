@@ -1,4 +1,4 @@
-# Next step: game's next methods
+# Next step: take turn
 
 #= Mastermind
 
@@ -20,16 +20,10 @@ class Game
 		@player_name = get_player_name
 		puts "Welcome to Mastermind: Console Edition, #{@player_name}!"
 		@code = create_code
-		puts "The computer has chosen a 4-color code. Please make your first guess, typing in 4 color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y):"
+		puts "The computer has chosen a 4-color code."
 
-		# Start with a single turn
-		guess = gets.chomp.split("")
-		valid = valid_guess?(guess, @peg_options)
-		until valid
-			puts "Please enter 4 valid color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y):"
-			guess = gets.chomp.split("")
-			valid = valid_guess?(guess, @peg_options)
-		end
+		# Start with one turn
+		take_turn
 	end
 
 	# Checks to ensure all elements in the user's guess are valid peg options and the guess contains 4 pegs
@@ -38,6 +32,15 @@ class Game
 	end
 
 	def take_turn
+		puts "Please make a guess, typing in 4 color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y):"
+		guess = gets.chomp.split("")
+		valid = valid_guess?(guess, @peg_options)
+		until valid
+			puts "Please enter 4 valid color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y):"
+			guess = gets.chomp.split("")
+			valid = valid_guess?(guess, @peg_options)
+		end
+		# Test against and update board
 	end
 
 	def get_player_name
