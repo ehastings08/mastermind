@@ -6,9 +6,10 @@ require "colorize"
 
 class Game
 	def initialize
-		# Create a new board
+		# Create a new board and set @turn and @code to nothing
 		@board = Board.new
 		@turn = 0
+		@code = []
 	end
 
 	def run_game
@@ -20,6 +21,11 @@ class Game
 	end
 
 	def create_code
+		options = %w(R, G, B, M, C, Y)
+		4.times do |num| 
+			@code.push(options.sample)
+		end
+		@code
 	end
 end
 
