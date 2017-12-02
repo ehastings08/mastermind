@@ -26,6 +26,8 @@ class Game
 		take_turn
 		# Test with two turns
 		take_turn
+
+
 	end
 
 	# Checks to ensure all elements in the user's guess are valid peg options and the guess contains 4 pegs
@@ -48,7 +50,6 @@ class Game
 		@board.make_guess(@turn, guess, @code)
 		puts "Your guess has been added to the board. Here's what the computer provided you as feedback:"
 		@board.display_board
-
 	end
 
 	def get_player_name
@@ -65,7 +66,13 @@ class Game
 		code
 	end
 
+	# The game is over if EITHER the player has made 12 unsuccessful guesses OR the player has guessed the code
 	def game_over?
+		if @guesses.key?(12) || @guesses.value?(@code)
+			return true
+		else
+			return false
+		end
 	end
 end
 
