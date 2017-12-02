@@ -22,13 +22,15 @@ class Game
 		puts "The computer has chosen a 4-color code."
 		puts "While debugging, here it is: #{@code}"
 
-		# Update this to an until loop:
 		until self.game_over?
-			puts "Game over? #{self.game_over?}"
 			take_turn
 		end
 
-
+		if won_game?
+			puts "Congratulations! You won the game."
+		else
+			puts "Sorry, you're all out of turns. Game over."
+		end
 	end
 
 	# Checks to ensure all elements in the user's guess are valid peg options and the guess contains 4 pegs
@@ -69,11 +71,11 @@ class Game
 
 	# The game is over if EITHER the player has made 12 unsuccessful guesses OR the player has guessed the code
 	def game_over?
-		if @board.guesses.key?(12) || @board.guesses.value?(@code)
-			return true
-		else
-			return false
-		end
+		(@board.guesses.key?(12) || @board.guesses.value?(@code)) ? true : false
+	end
+
+	def won_game?
+		@board.guesses.value?(@code) ? true : false
 	end
 end
 
