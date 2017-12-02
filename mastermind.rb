@@ -43,6 +43,8 @@ class Game
 
 		# Test against and update board
 		@board.make_guess(@turn, guess, @code)
+		puts "Your guess has been added to the board. Here's what the computer provided you as feedback:"
+		@board.display_board
 
 	end
 
@@ -78,11 +80,11 @@ class Board
 		12.times do |num|
 			if @guesses.key?(num+1)
 				print "+".colorize(:yellow)
-				guesses[num+1].each do |peg|
+				@guesses[num+1].each do |peg|
 					print peg.colorize(color_mapping[peg])
 				end
 				print "++".colorize(:yellow)
-				@feedback[num+1].each do |feedback_peg|
+				@feedbacks[num+1].each do |feedback_peg|
 					print feedback_peg.colorize(color_mapping[feedback_peg])
 				end
 				print "+".colorize(:yellow)
@@ -115,9 +117,6 @@ class Board
 
 		sorted_feedback = unsorted_feedbacks.sort {|a,b| b <=> a}
 		@feedbacks[turn] = sorted_feedback
-	end
-
-	def update_board(guess)
 	end
 end
 
