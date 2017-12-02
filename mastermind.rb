@@ -1,4 +1,4 @@
-# Next step: take turn
+# Next step: make guess, update board
 
 #= Mastermind
 
@@ -42,7 +42,7 @@ class Game
 		end
 
 		# Test against and update board
-		@board.make_guess(@turn, guess)
+		@board.make_guess(@turn, guess, @code)
 
 	end
 
@@ -94,21 +94,15 @@ class Board
 		puts "+====++====+".colorize(:yellow)
 	end
 
-	def make_guess(turn, guess)
+	def make_guess(turn, guess, code)
 		@guesses[turn] = guess
+
+		# Feedback logic
 	end
 
 	def update_board(guess)
 	end
 end
 
-class Peg
-	@@guess_pegs = %w(R, G, B, M, C, Y) # Red Green Blue Magenta Cyan Yellow
-
-	def initialize(color)
-		@color = color
-	end
-
-end
 
 game = Game.new
