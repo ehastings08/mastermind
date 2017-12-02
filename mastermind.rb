@@ -17,8 +17,8 @@ class Game
 	def run_game
 		# Startup
 		@turn += 1
-		@player_name = get_player_name
-		puts "Welcome to Mastermind: Console Edition, #{@player_name}!"
+		#@player_name = get_player_name
+		puts "Welcome to Mastermind: Console Edition!" #, #{@player_name}!"
 		@code = create_code
 		puts "The computer has chosen a 4-color code."
 
@@ -47,7 +47,7 @@ class Game
 	end
 
 	def get_player_name
-		print "Please enter your name:"
+		print "Please enter your name: "
 		gets.chomp
 	end
 
@@ -98,6 +98,23 @@ class Board
 		@guesses[turn] = guess
 
 		# Feedback logic
+		unsorted_feedbacks = []
+
+		# Feedback logic - here comes the fun part!!!
+		guess.each do |peg|
+			if code.include? peg
+				if guess.index(peg) == code.index(peg)
+					unsorted_feedbacks.push('K')
+				else
+					unsorted_feedbacks.push('W')
+				end
+			else
+				unsorted_feedbacks.push('-')
+			end
+		end
+
+		sorted_feedback = unsorted_feedbacks.sort {|a,b| b <=> a}
+		@feedbacks[turn] = sorted_feedback
 	end
 
 	def update_board(guess)
