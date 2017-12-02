@@ -1,5 +1,3 @@
-# Next step: make guess, update board
-
 #= Mastermind
 
 require "colorize"
