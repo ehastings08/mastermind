@@ -20,12 +20,13 @@ class Game
 		puts "Welcome to Mastermind: Console Edition!" #, #{@player_name}!"
 		@code = create_code
 		puts "The computer has chosen a 4-color code."
+		puts "While debugging, here it is: #{@code}"
 
 		# Update this to an until loop:
-		# Start with one turn
-		take_turn
-		# Test with two turns
-		take_turn
+		until self.game_over?
+			puts "Game over? #{self.game_over?}"
+			take_turn
+		end
 
 
 	end
@@ -68,7 +69,7 @@ class Game
 
 	# The game is over if EITHER the player has made 12 unsuccessful guesses OR the player has guessed the code
 	def game_over?
-		if @guesses.key?(12) || @guesses.value?(@code)
+		if @board.guesses.key?(12) || @board.guesses.value?(@code)
 			return true
 		else
 			return false
@@ -76,7 +77,11 @@ class Game
 	end
 end
 
+
+
 class Board
+	attr_accessor :guesses
+
 	def initialize
 		@guesses = {}
 		@feedbacks = {}
