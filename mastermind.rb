@@ -16,13 +16,15 @@ class Game
 	# run_game method increments turns and runs a turn until the game is over
 	def run_game
 		# Startup
-		@turn += 1
 		#@player_name = get_player_name
 		puts "Welcome to Mastermind: Console Edition!" #, #{@player_name}!"
 		@code = create_code
 		puts "The computer has chosen a 4-color code."
 
+		# Update this to an until loop:
 		# Start with one turn
+		take_turn
+		# Test with two turns
 		take_turn
 	end
 
@@ -32,6 +34,7 @@ class Game
 	end
 
 	def take_turn
+		@turn += 1
 		puts "Please make a guess, typing in 4 color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y):"
 		guess = gets.chomp.split("")
 		valid = valid_guess?(guess, @peg_options)
