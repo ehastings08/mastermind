@@ -40,7 +40,10 @@ class Game
 			guess = gets.chomp.split("")
 			valid = valid_guess?(guess, @peg_options)
 		end
+
 		# Test against and update board
+		@board.make_guess(@turn, guess)
+
 	end
 
 	def get_player_name
@@ -68,23 +71,31 @@ class Board
 	end
 
 	def display_board
-		puts "+====+".colorize(:yellow)
+		# Update to include feedback on the right hand side
+		color_mapping = {'R' => :red , 'G' => :green, 'B' => :blue, 'M' => :magenta, 'C' => :cyan, 'Y' => :light_yellow, 'W' => :white, 'K' => :light_black, '-' => :yellow}
+
+		puts "+====++====+".colorize(:yellow)
 		12.times do |num|
 			if @guesses.key?(num+1)
 				print "+".colorize(:yellow)
-				@guesses[num+1].each do |peg|
-					print peg.colorize(:yellow)
+				guesses[num+1].each do |peg|
+					print peg.colorize(color_mapping[peg])
+				end
+				print "++".colorize(:yellow)
+				@feedback[num+1].each do |feedback_peg|
+					print feedback_peg.colorize(color_mapping[feedback_peg])
 				end
 				print "+".colorize(:yellow)
 			else
-				print "+----+".colorize(:yellow)
+				print "+----++----+".colorize(:yellow)
 			end
 			print "\n"
 		end
-		puts "+====+".colorize(:yellow)
+		puts "+====++====+".colorize(:yellow)
 	end
 
-	def make_guess(guess)
+	def make_guess(turn, guess)
+		@guesses[turn] = guess
 	end
 
 	def update_board(guess)
