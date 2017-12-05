@@ -22,15 +22,16 @@ class Game
 		if @choice == 'codemaker'
 			@code = record_player_code
 			puts "Thanks! Your code has been stored."
+			until self.game_over?
+				computer_take_turn
+			end
 		else 
 			@code = create_code
 			puts "The computer has chosen a 4-color code."
-		end
-
-		puts "While debugging, here is the code: #{@code}"
-
-		until self.game_over?
-			player_take_turn
+			puts "While debugging, here is the code: #{@code}"
+			until self.game_over?
+				player_take_turn
+			end
 		end
 
 		if won_game?
@@ -83,6 +84,17 @@ class Game
 		# Test against and update board
 		@board.make_guess(@turn, guess, @code)
 		puts "Your guess has been added to the board. Here's what the computer provided you as feedback:"
+		@board.display_board
+	end
+
+	def computer_take_turn
+		@turn += 1
+		puts "The computer is guessing!"
+		# The computer makes a guess, using the create_code function
+		computer_guess = create_code
+		# The board updates with feedback
+		@board.make_guess(@turn, computer_guess, @code)
+		puts "The computer has placed its guess on the board. Based on your code, we've updated the feedback pegs on the board as well."
 		@board.display_board
 	end
 
