@@ -37,7 +37,7 @@ class Game
 		if won_game?
 			puts "Congratulations! You won the game."
 		else
-			puts "Sorry, you're all out of turns. Game over."
+			puts "Sorry, all out of turns. Game over."
 		end
 	end
 
@@ -68,6 +68,7 @@ class Game
 			code = gets.chomp.split("")
 			valid = valid_code?(code, @peg_options)
 		end
+		code
 	end
 
 	def player_take_turn
@@ -92,6 +93,8 @@ class Game
 		puts "The computer is guessing!"
 		# The computer makes a guess, using the create_code function
 		computer_guess = create_code
+		puts "Debug: computer_guess = #{computer_guess}"
+		puts "Debug: current code is #@code"
 		# The board updates with feedback
 		@board.make_guess(@turn, computer_guess, @code)
 		puts "The computer has placed its guess on the board. Based on your code, we've updated the feedback pegs on the board as well."
