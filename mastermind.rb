@@ -57,30 +57,28 @@ class Game
 		(code - peg_options).empty? && code.length == 4
 	end
 
-	# Allows player to record their secret code
-	def record_player_code
-		# Refactor validation to make this + take_turn method DRY
-		puts "Please enter the secret code you have chosen, typing in 4 color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y): "
-		code = gets.chomp.split("")
-		valid = valid_code?(code, @peg_options)
+	def validate_input_loop
+		input = gets.chomp.split("")
+		valid = valid_code?(input, @peg_options)
 		until valid
 			puts "Please enter 4 valid color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y): "
-			code = gets.chomp.split("")
-			valid = valid_code?(code, @peg_options)
+			input = gets.chomp.split("")
+			valid = valid_code?(input, @peg_options)
 		end
 		code
 	end
 
+	# Allows player to record their secret code
+	def record_player_code
+		# Refactor validation to make this + take_turn method DRY
+		puts "Please enter the secret code you have chosen, typing in 4 color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y): "
+		code = validate_input_loop
+	end
+
 	def player_take_turn
 		@turn += 1
-		puts "Please make a guess, typing in 4 color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y):"
-		guess = gets.chomp.split("")
-		valid = valid_code?(guess, @peg_options)
-		until valid
-			puts "Please enter 4 valid color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y):"
-			guess = gets.chomp.split("")
-			valid = valid_code?(guess, @peg_options)
-		end
+		puts "Please enter 4 valid color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y):"
+		guess = validate_input_loop
 
 		# Test against and update board
 		@board.make_guess(@turn, guess, @code)

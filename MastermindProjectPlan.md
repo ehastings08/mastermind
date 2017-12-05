@@ -81,6 +81,7 @@ Build the game assuming the computer randomly selects the secret colors and the 
 - Next, add a little bit more intelligence to the computer player so that, if the computer has guessed the right color but the wrong position, its next guess will need to include that color somewhere. Feel free to make the AI even smarter.
 
 
-## Steps
+## To Do
 
-- 
+- DRY code
+- Remove debug statements
