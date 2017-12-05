@@ -14,14 +14,23 @@ class Game
 	# run_game method increments turns and runs a turn until the game is over
 	def run_game
 		# Startup
-		#@player_name = get_player_name
-		puts "Welcome to Mastermind: Console Edition!" #, #{@player_name}!"
-		@code = create_code
-		puts "The computer has chosen a 4-color code."
-		puts "While debugging, here it is: #{@code}"
+		puts "Welcome to Mastermind: Console Edition!"
+
+		# Select player or computer
+		@choice = choose_codemaker
+
+		if @choice == 'codemaker'
+			@code = record_player_code
+			puts "Thanks! Your code has been stored."
+		else 
+			@code = create_code
+			puts "The computer has chosen a 4-color code."
+		end
+
+		puts "While debugging, here is the code: #{@code}"
 
 		until self.game_over?
-			take_turn
+			player_take_turn
 		end
 
 		if won_game?
@@ -31,20 +40,44 @@ class Game
 		end
 	end
 
-	# Checks to ensure all elements in the user's guess are valid peg options and the guess contains 4 pegs
-	def valid_guess?(guess, peg_options)
-		(guess - peg_options).empty? && guess.length == 4
+	def choose_codemaker
+		puts "Please choose to be codemaker or codebreaker. The codemaker selects a secret code and gives feedback on the codebreaker's guesses. The codebreaker makes guesses to try and identify the codemaker's secret code."
+		puts "Enter our choice as 'codemaker' or 'codebreaker'."
+		choice = gets.chomp
 	end
 
-	def take_turn
+	# Checks to ensure person has entered a valid choice for codemaker/breaker
+	def valid_role?(choice)
+		choice == "codemaker" || choice == "codebreaker" ? true : false
+	end
+
+	# Checks to ensure all elements in the user's guess are valid peg options and the guess contains 4 pegs
+	def valid_code?(code, peg_options)
+		(code - peg_options).empty? && code.length == 4
+	end
+
+	# Allows player to record their secret code
+	def record_player_code
+		# Refactor validation to make this + take_turn method DRY
+		puts "Please enter the secret code you have chosen, typing in 4 color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y): "
+		code = gets.chomp.split("")
+		valid = valid_code?(code, @peg_options)
+		until valid
+			puts "Please enter 4 valid color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y): "
+			code = gets.chomp.split("")
+			valid = valid_code?(code, @peg_options)
+		end
+	end
+
+	def player_take_turn
 		@turn += 1
 		puts "Please make a guess, typing in 4 color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y):"
 		guess = gets.chomp.split("")
-		valid = valid_guess?(guess, @peg_options)
+		valid = valid_code?(guess, @peg_options)
 		until valid
 			puts "Please enter 4 valid color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y):"
 			guess = gets.chomp.split("")
-			valid = valid_guess?(guess, @peg_options)
+			valid = valid_code?(guess, @peg_options)
 		end
 
 		# Test against and update board

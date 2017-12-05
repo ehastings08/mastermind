@@ -23,20 +23,20 @@
 ## Setup
 
 - Game class
-   * Initialize game ✓
-   * Ask for player name ✓
-   * Randomly create the code and store it ✓
+   * Initialize game 
+   * Ask for player name 
+   * Randomly create the code and store it 
    * Take turn method
    * Run game: Keep running turns until game is over or player guesses correctly
    * Game over method to check if game is over based on board
    * Terminate or ask to play again
 
 - Board class
-   * Initializes an empty board ✓
+   * Initializes an empty board 
    * Stores guesses as a hash? {turn => guess_array} 
    * Stores feedback as a hash? {turn => feedback_array} 
    * Updates guesses on a turn and returns feedback
-   * Display method to show current board. ✓
+   * Display method to show current board. 
    		If that turn exists, show the guesses
    		Otherwise show ----
    * Update method to update the board with a guess
@@ -67,3 +67,20 @@ Build the game assuming the computer randomly selects the secret colors and the 
 	* If neither: -
 
 - Add all feedbacks and then sort the array so there is no indication of position given (maybe factor this out)
+
+
+
+# Refactor
+
+## Human Player Chooses
+
+- Now refactor your code to allow the human player to choose whether she wants to be the creator of the secret code or the guesser.
+
+- Build it out so that the computer will guess if you decide to choose your own secret colors. Start by having the computer guess randomly (but keeping the ones that match exactly).
+
+- Next, add a little bit more intelligence to the computer player so that, if the computer has guessed the right color but the wrong position, its next guess will need to include that color somewhere. Feel free to make the AI even smarter.
+
+
+## Steps
+
+- 
