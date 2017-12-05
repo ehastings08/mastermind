@@ -65,7 +65,7 @@ class Game
 			input = gets.chomp.split("")
 			valid = valid_code?(input, @peg_options)
 		end
-		code
+		input
 	end
 
 	# Allows player to record their secret code
@@ -73,6 +73,7 @@ class Game
 		# Refactor validation to make this + take_turn method DRY
 		puts "Please enter the secret code you have chosen, typing in 4 color characters. Remember, your options are: Red (R), Green (G), Blue (B), Magenta (M), Cyan (C), and Yellow (Y): "
 		code = validate_input_loop
+		code
 	end
 
 	def player_take_turn
